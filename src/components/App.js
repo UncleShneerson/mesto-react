@@ -53,46 +53,6 @@ export default function App() {
     // поэтому просто вставил обработчик чтобы скрыть ошибку
   }
 
-  // Инпуты для форм попапов
-  function insertFormAvatar () {
-    return (
-      <label className="form__field">
-        <input type="url" placeholder="Ссылка на картинку" value="" name="avatar" className="form__input" onChange={handlerOnChange} required/>
-        <span className="form__input-error form__input-error_place_avatar"></span>
-      </label>
-    )
-  }
-
-  function insertFormProfile () {
-    return (
-      <>
-      <label className="form__field">
-        <input type="text" placeholder="Имя" value="" name="userName" className="form__input" minLength="2" maxLength="40" onChange={handlerOnChange} required/>
-        <span className="form__input-error form__input-error_place_userName"></span>
-      </label>
-      <label className="form__field">
-        <input type="text" placeholder="О себе?" value="" name="userDescription" className="form__input" minLength="2" maxLength="200" onChange={handlerOnChange} required/>
-        <span className="form__input-error form__input-error_place_userDescription"></span>
-      </label>
-      </>
-    )
-  }
-
-  function insertFormCard () {
-    return (
-      <>
-      <label className="form__field">
-        <input type="text" placeholder="Название" value="" name="cardPlace" className="form__input" minLength="2" maxLength="30" onChange={handlerOnChange} required/>
-        <span className="form__input-error form__input-error_place_cardPlace"></span>
-      </label>
-      <label className="form__field">
-        <input type="url" placeholder="Ссылка на картинку" value="" name="cardLink" className="form__input" onChange={handlerOnChange} required/>
-        <span className="form__input-error form__input-error_place_cardLink"></span>
-      </label>
-      </>
-    )
-  }
-
   return (
     <>
     <Header/>
@@ -104,35 +64,34 @@ export default function App() {
       onDeleteClick = { handleDeletePlaceClick }
     />
     <Footer/>
-    <PopupWithForm
-      name = "avatar" title = "Обновить аватар" textSubmit = "Сохранить"
-      inputs    = { insertFormAvatar() }
-      isOpen    = { isEditAvatarPopupOpen }
-      onClose   = { closeAllPopups  }
-    />
-    <PopupWithForm
-      name = "profile" title = "Редактировать профиль" textSubmit = "Сохранить"
-      inputs    = { insertFormProfile() }
-      isOpen    = { isEditProfilePopupOpen }
-      onClose   = { closeAllPopups }
-    />
-    <PopupWithForm
-      name = "cards" title = "Новое место" textSubmit = "Создать"
-      inputs    = { insertFormCard() }
-      isOpen    = { isAddPlacePopupOpen }
-      onClose   = { closeAllPopups }
-    />
-    <PopupWithForm
-      name = "deleteCard" title = "Вы уверены?" textSubmit = "Да"
-      inputs    = ""
-      isOpen    = { isDeletePlacePopupOpen }
-      onClose   = { closeAllPopups }
-    />
-    <ImagePopup
-      card      = { selectedCard }
-      isOpen    = { isImagePopupOpen }
-      onClose   = { closeAllPopups }
-    />
+    <PopupWithForm name = "avatar" title = "Обновить аватар" textSubmit = "Сохранить" isOpen = { isEditAvatarPopupOpen } onClose = { closeAllPopups  }>
+      <label className="form__field">
+        <input type="url" placeholder="Ссылка на картинку" value="" name="avatar" className="form__input" onChange={handlerOnChange} required/>
+        <span className="form__input-error form__input-error_place_avatar"></span>
+      </label>
+    </PopupWithForm>
+    <PopupWithForm name = "profile" title = "Редактировать профиль" textSubmit = "Сохранить" isOpen = { isEditProfilePopupOpen } onClose = { closeAllPopups }>
+      <label className="form__field">
+        <input type="text" placeholder="Имя" value="" name="userName" className="form__input" minLength="2" maxLength="40" onChange={handlerOnChange} required/>
+        <span className="form__input-error form__input-error_place_userName"></span>
+      </label>
+      <label className="form__field">
+        <input type="text" placeholder="О себе?" value="" name="userDescription" className="form__input" minLength="2" maxLength="200" onChange={handlerOnChange} required/>
+        <span className="form__input-error form__input-error_place_userDescription"></span>
+      </label>
+    </PopupWithForm>
+    <PopupWithForm name = "cards" title = "Новое место" textSubmit = "Создать" isOpen = { isAddPlacePopupOpen } onClose = { closeAllPopups }>
+      <label className="form__field">
+        <input type="text" placeholder="Название" value="" name="cardPlace" className="form__input" minLength="2" maxLength="30" onChange={handlerOnChange} required/>
+        <span className="form__input-error form__input-error_place_cardPlace"></span>
+      </label>
+      <label className="form__field">
+        <input type="url" placeholder="Ссылка на картинку" value="" name="cardLink" className="form__input" onChange={handlerOnChange} required/>
+        <span className="form__input-error form__input-error_place_cardLink"></span>
+      </label>
+    </PopupWithForm>
+    <PopupWithForm name = "deleteCard" title = "Вы уверены?" textSubmit = "Да" isOpen = { isDeletePlacePopupOpen } onClose = { closeAllPopups } />
+    <ImagePopup card = { selectedCard } isOpen = { isImagePopupOpen } onClose = { closeAllPopups } />
     </>
   );
 };

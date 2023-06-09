@@ -1,3 +1,7 @@
+// Генадий, спасибо огромное за развернутые комментарии и ссылки,
+// особенно за магию с API
+// надеюсь ничего не пропустил и все внес. Хорошего дня )
+
 import React from 'react';
 import {api} from '../utils/api.js';
 import Card from './Card.js';
@@ -8,7 +12,6 @@ export default function Main (props) {
   const [userDescription, setUserDescription] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('');
   const [cards, setCards] = React.useState([]);
-
 
   function setUserInfo (data) {
     setUserName(data.name);
@@ -24,11 +27,10 @@ export default function Main (props) {
       setUserInfo(info);
       setCards(initialCards);
     })
-    .catch((err)=>{console.log(err)});
+    .catch(console.error);
   }, [])
 
   return (
-    <>
     <main className="content">
       <section className="profile">
           <div className="profile__avatar-info" onClick={props.onEditAvatar}>
@@ -63,7 +65,6 @@ export default function Main (props) {
         </div>
       </section>
     </main>
-    </>
   )
 }
 

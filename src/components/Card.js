@@ -15,7 +15,7 @@ export default function Card (props) {
 
   return (
   <li className="places__card">
-    <img className="places__image" src={imageURL} onError={errorUrl} onClick={handleCardClick}/>
+    <img className="places__image" alt={props.name} src={imageURL} onError={errorUrl} onClick={handleCardClick}/>
     <img src={iconDelete} alt="Удалить" className="places__delete hover-opacity" onClick={props.onDeleteClick}/>
     <div className="places__description">
       <h2 className="places__name">{props.name}</h2>

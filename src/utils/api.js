@@ -6,97 +6,74 @@ class Api {
     this._token = headers['authorization'];
   }
 
+  _request(endpoit, options) {
+    return fetch(`${this._baseUrl}${endpoit}`, options).then(this._isItOk)
+  }
+
   getInitialCards () {
-    return fetch(`${this._baseUrl}/cards`, {
-      headers: {
-        authorization: this._token
-      }
+    return this._request(`/cards`, {
+      headers: this._headers
     })
-    .then(this._isItOk)
   }
 
   postCard (newCardData) {
-    return fetch(`${this._baseUrl}/cards`, {
+    return this._request(`/cards`, {
       method: 'POST',
-      headers: {
-        authorization: this._token,
-        "Content-Type": "application/json"
-      },
+      headers: this._headers,
       body: JSON.stringify({
         "name": newCardData.name,
         "link": newCardData.link,
       })
     })
-    .then(this._isItOk)
   }
 
   deleteCard (cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+    return this._request(`/cards/${cardId}`, {
       method: 'DELETE',
-      headers: {
-        authorization: this._token
-      }
+      headers: this._headers
     })
-    .then(this._isItOk)
   }
 
   addLike (cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+    return this._request(`/cards/${cardId}/likes`, {
       method: 'PUT',
-      headers: {
-        authorization: this._token
-      }
+      headers: this._headers
     })
-    .then(this._isItOk)
   }
 
   deleteLike (cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+    return this._request(`/cards/${cardId}/likes`, {
       method: 'DELETE',
-      headers: {
-        authorization: this._token
-      }
+      headers: this._headers
     })
-    .then(this._isItOk)
   }
 
   getUserInfo () {
-    return fetch(`${this._baseUrl}/users/me`, {
-      headers: {
-        authorization: this._token
-      }
+    return this._request(`/users/me`, {
+      headers: this._headers
     })
-      .then(this._isItOk)
   }
 
   editUserInfo (data) {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return this._request(`/users/me`, {
       method: 'PATCH',
-      headers: {
-        authorization: this._token,
-        "Content-Type": "application/json"
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         about: data.about,
         avatar: data.avatar
       })
     })
-    .then(this._isItOk)
   }
 
   editUserAvatar (data) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
+    return this._request(`/users/me/avatar`, {
       method: 'PATCH',
-      headers: {
-        authorization: this._token,
-        "Content-Type": "application/json"
-      },
+      headers: this._headers,
       body: JSON.stringify({
         avatar: data.avatar
       })
     })
-    .then(this._isItOk)
   }
 
   _isItOk(res) {
@@ -111,6 +88,7 @@ class Api {
 export const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
   headers: {
-    authorization: 'd1a94a05-476b-47ad-bf8b-c677840ac343'
+    authorization: 'd1a94a05-476b-47ad-bf8b-c677840ac343',
+    "Content-Type": "application/json"
   }
 });

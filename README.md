@@ -46,4 +46,4 @@ React:
 * Этап 1. Первые пробы в React. Перенос стилей, разметки, изображений и попапов. Базовые функции API
 
 ### Cсылка на проект
-[**Mesto.Russia**](https://uncleshneerson.github.io/mesto-react/).
+[**Mesto.Russia.React**](https://uncleshneerson.github.io/mesto-react/).
