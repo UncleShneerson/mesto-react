@@ -1,29 +1,59 @@
-import React from 'react';
+import React from "react";
 import PopupWithForm from "./PopupWithForm";
+import useForm from "../hooks/useForm";
+import useValidation from "../hooks/useValidation";
+import InputElement from "./InputElement";
 
-export default function EditAvatarPopup ({isOpen, onClose, onSubmit, loadingText}) {
-  const inputRef = React.useRef();
+export default function EditAvatarPopup({
+  isOpen,
+  onClose,
+  onSubmit,
+  loadingText,
+}) {
+  const { values, handleChange: handleInputChange, setValues } = useForm({});
+
+  const {
+    handleChange: handleValidation,
+    errorMessages,
+    setErrorMessages,
+    isValid,
+    setIsValid,
+  } = useValidation({});
+
+  React.useEffect(() => {
+    setErrorMessages({ avatar: "" });
+    setValues({ avatar: "" });
+    setIsValid(false);
+  }, [isOpen]);
 
   function handleSubmit() {
-    onSubmit({
-      avatar: inputRef.current.value
-    });
+    onSubmit(values);
+  }
+
+  function handleChange(e) {
+    handleValidation(e);
+    handleInputChange(e);
   }
 
   return (
     <PopupWithForm
-      name        = "avatar"
-      title       = "Обновить аватар"
-      textSubmit  = "Сохранить"
-      isOpen      = { isOpen }
-      onClose     = { onClose }
-      onSubmit    = { handleSubmit }
-      loadingText = { loadingText }
-      validity    = { true }>
-        <label className="form__field">
-          <input ref={inputRef} type="url" placeholder="Ссылка на картинку"  name="avatar" className="form__input" required/>
-          <span className="form__input-error form__input-error_place_avatar"></span>
-        </label>
+      name="avatar"
+      title="Обновить аватар"
+      textSubmit="Сохранить"
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+      loadingText={loadingText}
+      validity={isValid}
+    >
+      <InputElement
+        placeHolder="Ссылка на картинку"
+        name="avatar"
+        value={values}
+        errorMessages={errorMessages}
+        onChange={handleChange}
+        type="url"
+      />
     </PopupWithForm>
-  )
+  );
 }
