@@ -33,8 +33,6 @@
 @import url(./blocks/places/__like/places__like.css);
 @import url(./blocks/places/__like-number/places__like-number.css);
 @import url(./blocks/places/__like/_active/places__like_active.css);
-@import url(./blocks/places/__notice/places__notice.css);
-@import url(./blocks/places/__notice/_active/places__notice_active.css);
 
 @import url(./blocks/popup/popup.css);
 @import url(./blocks/popup/_funct/popup_funct_image.css);

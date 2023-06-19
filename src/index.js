@@ -5,7 +5,6 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
 const rootDiv = document.getElementById('root');
-rootDiv.classList.add('root');
 const root = ReactDOM.createRoot(rootDiv);
 
 

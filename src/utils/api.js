@@ -1,4 +1,3 @@
-
 class Api {
   constructor ({baseUrl, headers}) {
     this._baseUrl = baseUrl;
@@ -34,14 +33,19 @@ class Api {
     })
   }
 
-  addLike (cardId) {
+  changeLikeCardStatus (cardId, isLiked) {
+    if (isLiked) { return this._addLike(cardId)}
+    else {return this._deleteLike(cardId)}
+  }
+
+  _addLike (cardId) {
     return this._request(`/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: this._headers
     })
   }
 
-  deleteLike (cardId) {
+  _deleteLike (cardId) {
     return this._request(`/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: this._headers
