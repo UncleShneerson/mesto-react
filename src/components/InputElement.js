@@ -14,7 +14,7 @@ export default function InputElement({
       <input
         type={type}
         placeholder={placeHolder}
-        value={value[name]}
+        value={value[name] || ""}
         name={name}
         minLength={minLength}
         maxLength={maxLength}
